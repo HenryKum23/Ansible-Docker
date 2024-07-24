@@ -1,48 +1,50 @@
-HOW TO USED ANSIBLE TO INSTALL DOCKER FROM MY ANSIBLE CONTROL NODE ONTO AN UBUNTU REMOTE SERVER.
-
-
+How to Use Ansible to Install Docker from an Ansible Control Node onto an Ubuntu Remote Server
 Prerequisites:
 
-1.	One Ansible control node: an Ubuntu 22.04 machine with Ansible installed and configured to connect to your Ansible hosts using SSH keys.
+    Ansible Control Node: An Ubuntu 22.04 machine with Ansible installed and configured for SSH key-based authentication to connect to your Ansible hosts.
 
-2.	A remote server with Ubuntu 20.04: no prior setup is required on this server, but you must have SSH access to this server from the Ansible control node mentioned above. This server will become an Ansible host remote server, which is targeted for automated provisioning by the Ansible control node.
+    Remote Server with Ubuntu 20.04: This server requires SSH access from the Ansible control node. It will be configured as an Ansible host for automated provisioning.
 
-Files i created in order to be able to execute this task as a role.
+Files Created for Execution as a Role:
 
-1.	AnsibleKey1.pem 
-2.	Ansible.cfg 
-3.	Config 
-4.	Docker 
-5.	Inventory 
-6.	Playbook.yaml
+    AnsibleKey1.pem: Contains the SSH keypair for the Ansible control node, facilitating SSH connections to remote servers.
+
+    Ansible.cfg: Configures settings such as creating a new sudo user with passwordless sudo setup, and disabling password-based authentication for the root user.
+
+    Config: Includes tasks to install aptitude, preferred by Ansible, and necessary system packages.
+
+    Docker: Defines tasks related to Docker installation within the playbook.
+
+    Inventory: Lists all hosts and child hosts with their IP addresses and associated SSH keypairs for communication from the control host.
+
+    Playbook.yaml: Defines all automation tasks. Each task represents a specific action automated using Ansible.
+
+Steps:
 
 Step 1:
-In this AnsibleKey1.pem file it contains the keypair for my Ansible control node Ubuntu Server that will help me to SSH into it, to ping or create a connection to the remote ubuntu server.
+The AnsibleKey1.pem file contains the SSH keypair allowing the Ansible control node to establish secure connections with remote Ubuntu servers.
 
 Step 2:
-In the Ansible.cfg file it contains :
-•  Created a new sudo user and set up passwordless sudo.
-•  Disable password-based authentication for the root user and other configurations
+Ansible.cfg includes configurations:
+
+    Creation of a new sudo user with passwordless sudo.
+    Disabling password-based authentication for root and other related configurations.
 
 Step 3:
-In the config file, I have the configuration to Installing aptitude, which is preferred by Ansible as an alternative to the apt package manager and Installing required system packages.
+The Config file installs aptitude and necessary system packages preferred by Ansible.
 
 Step 4:
-Adding Docker Installation Tasks to be recogninse in my Playbook to execute;
-This step will install the latest version of Docker from the official repository. The Docker GPG key is added to verify the download, the official repository is added as a new package source, and Docker will be installed. Additionally, the Docker module for Python will be installed as well.
+Tasks for Docker installation are defined within the Docker section of the playbook:
+
+    Installs the latest Docker version from the official repository.
+    Adds the Docker GPG key for verification.
+    Adds the Docker official repository as a package source.
+    Installs the Docker Python module.
 
 Step 5:
-In this inventory file, it contains the list of all the host and children host with their IP address, as well as their keypair, that will allow ping or connection from the Control Host Server.
+The Inventory file lists all host machines and their respective IP addresses, configured with SSH keypairs for connectivity from the Ansible control node.
 
 Step 6:
-The playbook.yml file is where all my tasks are defined. A task is the smallest unit of action you can automate using an Ansible playbook.
+Playbook.yaml contains all defined tasks. Each task represents a specific action automated through Ansible playbooks, which are the building blocks of automation.
 
-
-
-
-
-
-
-
-
-
+This description provides a clear outline of how Ansible is used to automate the installation of Docker on remote Ubuntu servers, detailing necessary prerequisites, configuration files, and steps involved in the process.
