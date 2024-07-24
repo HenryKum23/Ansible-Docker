@@ -9,7 +9,7 @@
   ansible.builtin.apt:
     name: "{{ item }}"
     state: present
-    update_cache: yes  # 'yes' instead of 'true' is recommended for boolean values in Ansible
+    update_cache: yes
 
   loop:
     - net-tools
